@@ -3,7 +3,8 @@
 set -mxe
 
 echo "Starting Opensearch"
-
+PROFILES_PATH="/share-data/profiles"
+mkdir -p -m 777 ${PROFILES_PATH}
 ./opensearch-docker-entrypoint.sh opensearch &
 ENTRY_PID=$!
 echo "Entry: ${ENTRY_PID}"

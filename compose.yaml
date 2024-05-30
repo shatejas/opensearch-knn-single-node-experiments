@@ -13,7 +13,7 @@ services:
       - node.name=test
       - discovery.type=single-node
       - bootstrap.memory_lock=true
-      - "OPENSEARCH_JAVA_OPTS=-Xms${TEST_JVM} -Xmx${TEST_JVM}"
+      - "OPENSEARCH_JAVA_OPTS=-Xms${TEST_JVM} -Xmx${TEST_JVM} -XX:StartFlightRecording=delay=5s,dumponexit=true,filename=/share-data/profiles/${RUN_ID}.jfr"
       - "DISABLE_SECURITY_PLUGIN=true"
       - "RUN_ID=${RUN_ID}"
     ulimits:
