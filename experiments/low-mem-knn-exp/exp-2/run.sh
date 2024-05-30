@@ -13,19 +13,18 @@ set -xe
 #
 # Params:
 #   method: hnsw, ivf, hnswpq, ivfpq
-#   rescore context: 0r, 2r, 10r
-#   compression level: 1x, 8x, 16x, 32x
+#   rescore context: 0r, 1r, 2r
+#   compression level: 8x, 12x, 16x, 24x
 METHOD=$1
 RESCORE_CONTEXT=$2
 COMPRESSION_LEVEL=$3
 
 # Constants
-EXPERIMENT_PATH="experiments/low-mem-knn-exp/exp-1"
+EXPERIMENT_PATH="experiments/low-mem-knn-exp/exp-2"
 BASE_ENV_PATH="${EXPERIMENT_PATH}/env/${COMPRESSION_LEVEL}"
 INDEX_ENV_PATH="${BASE_ENV_PATH}/index-build.env"
 SEARCH_ENV_PATH="${BASE_ENV_PATH}/search.env"
 OSB_PARAMS_PATH="osb/custom/params"
-PARAMS_PATH="${EXPERIMENT_PATH}/osb-params/${COMPRESSION_LEVEL}"
 TMP_ENV_DIR="${EXPERIMENT_PATH}/tmp"
 TMP_ENV_NAME="test.env"
 TMP_ENV_PATH="${EXPERIMENT_PATH}/${TMP_ENV_NAME}"
@@ -33,21 +32,24 @@ TMP_ENV_PATH="${EXPERIMENT_PATH}/${TMP_ENV_NAME}"
 source ${EXPERIMENT_PATH}/functions.sh
 
 # Derive procedure for indexing and rescoring information
-if [[ "$METHOD" == "hnsw" ]]; then
-  RESCORE_SUFFIX=""
-  OSB_INDEX_PROCEDURE="no-train-test-index-with-merge"
-elif [[ "$METHOD" == "ivf" ]]; then
-  RESCORE_SUFFIX=""
-  OSB_INDEX_PROCEDURE="train-test-index-with-merge"
+RESCORE_SUFFIX="-${RESCORE_CONTEXT}"
+OSB_INDEX_PROCEDURE="train-test-index-with-merge"
+
+# Were only providing 2 different compression levels from param perspective
+if [[ "$METHOD" == "hnswpq" ]]; then
+  PARAMS_PATH="${EXPERIMENT_PATH}/osb-params/32x"
 else
-  RESCORE_SUFFIX="-${RESCORE_CONTEXT}"
-  OSB_INDEX_PROCEDURE="train-test-index-with-merge"
+  if [[ "$COMPRESSION_LEVEL" == "8x" ]] || [[ "$COMPRESSION_LEVEL" == "12x" ]]; then
+    PARAMS_PATH="${EXPERIMENT_PATH}/osb-params/16x"
+  else
+    PARAMS_PATH="${EXPERIMENT_PATH}/osb-params/32x"
+  fi
 fi
 
 # Copy params to OSB folder
 cp ${PARAMS_PATH}/${METHOD}-1c${RESCORE_SUFFIX}.json ${OSB_PARAMS_PATH}/
+cp ${PARAMS_PATH}/${METHOD}-2c${RESCORE_SUFFIX}.json ${OSB_PARAMS_PATH}/
 cp ${PARAMS_PATH}/${METHOD}-4c${RESCORE_SUFFIX}.json ${OSB_PARAMS_PATH}/
-cp ${PARAMS_PATH}/${METHOD}-16c${RESCORE_SUFFIX}.json ${OSB_PARAMS_PATH}/
 
 # Initialize shared data folder for containers
 mkdir -m 777 /tmp/share-data
@@ -61,12 +63,12 @@ docker compose --env-file ${SEARCH_ENV_PATH} --env-file ${TMP_ENV_PATH} -f compo
 clear_cache
 
 wait_for_container_stop osb
-setup_environment ${TMP_ENV_DIR} ${TMP_ENV_NAME} "search-4c" ${METHOD}-4c${RESCORE_SUFFIX}.json "search-only" true
+setup_environment ${TMP_ENV_DIR} ${TMP_ENV_NAME} "search-2c" ${METHOD}-2c${RESCORE_SUFFIX}.json "search-only" true
 docker compose --env-file ${SEARCH_ENV_PATH} --env-file ${TMP_ENV_PATH} -f compose.yaml up -d
 clear_cache
 
 wait_for_container_stop osb
-setup_environment ${TMP_ENV_DIR} ${TMP_ENV_NAME} "search-16c" ${METHOD}-16c${RESCORE_SUFFIX}.json "search-only" true
+setup_environment ${TMP_ENV_DIR} ${TMP_ENV_NAME} "search-4c" ${METHOD}-4c${RESCORE_SUFFIX}.json "search-only" true
 docker compose --env-file ${SEARCH_ENV_PATH} --env-file ${TMP_ENV_PATH} -f compose.yaml up -d
 clear_cache
 
