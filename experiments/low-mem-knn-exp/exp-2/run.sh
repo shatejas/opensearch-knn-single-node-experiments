@@ -28,6 +28,7 @@ OSB_PARAMS_PATH="osb/custom/params"
 TMP_ENV_DIR="${EXPERIMENT_PATH}/tmp"
 TMP_ENV_NAME="test.env"
 TMP_ENV_PATH="${EXPERIMENT_PATH}/${TMP_ENV_NAME}"
+STOP_PROCESS_PATH="/tmp/share-data/stop.txt"
 
 source ${EXPERIMENT_PATH}/functions.sh
 
@@ -58,21 +59,29 @@ setup_environment ${TMP_ENV_DIR} ${TMP_ENV_NAME} "index-build" ${METHOD}-1c${RES
 docker compose --env-file ${INDEX_ENV_PATH} --env-file ${TMP_ENV_PATH} -f compose.yaml up -d
 
 wait_for_container_stop osb
+echo stop > ${STOP_PROCESS_PATH}
+sleep 10
 setup_environment ${TMP_ENV_DIR} ${TMP_ENV_NAME} "search-1c" ${METHOD}-1c${RESCORE_SUFFIX}.json "search-only" true
 docker compose --env-file ${SEARCH_ENV_PATH} --env-file ${TMP_ENV_PATH} -f compose.yaml up -d
 clear_cache
 
 wait_for_container_stop osb
+echo stop > ${STOP_PROCESS_PATH}
+sleep 10
 setup_environment ${TMP_ENV_DIR} ${TMP_ENV_NAME} "search-2c" ${METHOD}-2c${RESCORE_SUFFIX}.json "search-only" true
 docker compose --env-file ${SEARCH_ENV_PATH} --env-file ${TMP_ENV_PATH} -f compose.yaml up -d
 clear_cache
 
 wait_for_container_stop osb
+echo stop > ${STOP_PROCESS_PATH}
+sleep 10
 setup_environment ${TMP_ENV_DIR} ${TMP_ENV_NAME} "search-4c" ${METHOD}-4c${RESCORE_SUFFIX}.json "search-only" true
 docker compose --env-file ${SEARCH_ENV_PATH} --env-file ${TMP_ENV_PATH} -f compose.yaml up -d
 clear_cache
 
 # Add at the end to ensure container finishes
 wait_for_container_stop osb
+echo stop > ${STOP_PROCESS_PATH}
+sleep 10
 
 echo "Finished all runs"

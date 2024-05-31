@@ -13,6 +13,7 @@ OS_PID=`ps aux | grep "[o]rg.opensearch.bootstrap.OpenSearch" | tr -s ' ' | cut 
 echo "OS: ${OS_PID}"
 bash /profile-poller.sh ${OS_PID} &
 bash /process-stats-collector.sh ${OS_PID} ${RUN_ID} &
+bash /graceful-shutdown-poller.sh ${OS_PID} &
 
 # Foreground original process
 fg %1

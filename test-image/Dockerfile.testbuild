@@ -18,6 +18,7 @@ RUN unzip plugins/opensearch-knn/opensearch-knn-2.14.0.0-SNAPSHOT.zip -d plugins
 COPY utils/process-stats-collector.sh /process-stats-collector.sh
 COPY utils/profile-helper.sh /profile-helper.sh
 COPY utils/profile-poller.sh /profile-poller.sh
+COPY utils/graceful-shutdown-poller.sh /graceful-shutdown-poller.sh
 COPY custom-entrypoint.sh /custom-entrypoint.sh
 
 ENTRYPOINT ["/bin/bash", "/custom-entrypoint.sh"]
