@@ -97,6 +97,11 @@ services:
           memory: ${OSB_MEM_SIZE}
 volumes:
   test:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /os-data
   metrics:
   share-data:
     driver: local
