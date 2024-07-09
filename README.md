@@ -73,3 +73,33 @@ From a high level, to run an experiment, we need to fill the [osb/custom/params]
 parameters we want to use for the run. This will tell OSB what to do. See 
 [experiments](experiments/low-mem-knn-exp/exp-1/osb-params) for examples of different parameter configurations that can 
 be selected. 
+
+## Results
+
+### System Metrics
+
+Several different system metrics are captured during runs. See 
+[test-image/utils/process-stats-collector.sh](test-image/utils/process-stats-collector.sh) for more details. In general,
+every second, the following metrics are collected from the OS process and output to the file 
+"/tmp/share-data/telemetry/process-stats-${RUN_ID}.csv":
+1. CPU_USAGE
+2. MEM_USAGE
+3. MINOR_FAULTS
+4. MAJOR_FAULTS
+5. ANON_RSS
+6. ANON_FILE
+
+Also, it is possible to capture full system metrics like io in wrapper scripts. See 
+[experiments/low-mem-knn-exp/exp-4/io-poll.sh](experiments/low-mem-knn-exp/exp-4/io-poll.sh) for an example
+
+### Profiles
+
+From its entry-point, OSB will start an  async profile on the OpenSearch process that is delayed 120 seconds and runs 
+for 60 seconds to capture a flamegraph of the process.
+
+Additionally, the OpenSearch process is ran with JFR configured to give more profiling insights.
+
+### Results
+
+OSB will output its results to the "/tmp/share-data/results" path. In it, there will be a text file that contains the 
+recall and one that contains the OSB report. 
