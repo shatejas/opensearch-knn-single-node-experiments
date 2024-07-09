@@ -49,22 +49,23 @@ an example.
 ### Parameters
 There are several environment variables that need to be configured in order to run the docker compose setup
 
-| Key Name           | Description                                                   |
-|--------------------|---------------------------------------------------------------|
-| RUN_ID             | Run identifier. Will be used in file names                    |
-| TEST_REPO          | Link to k-NN repo. Plugin will be built from source from here |
-| TEST_BRANCH        | k-NN branch name. Plugin will be built from source from here  |
-| TEST_JVM           | Amount of JVM to be used for test container (i.e. 32g)        |
-| TEST_CPU_COUNT     | Number of CPUs test container will get.                       |
-| TEST_MEM_SIZE      | Amount of total memory test container will be limited at.     |
-| METRICS_JVM        | Amount of JVM to be used for metrics container (i.e. 1g)      |
-| METRICS_CPU_COUNT  | Number of CPUs metrics container will get.                    |
-| METRICS_MEM_SIZE   | Amount of total memory metrics container will be limited at.  |
-| OSB_PROCEDURE      | OSB procedure to be run                                       |
-| OSB_PARAMS         | OSB params to be used (include .json extension)               |
-| OSB_SHOULD_PROFILE | Should profiling be triggered for this run                    |
-| OSB_CPU_COUNT      | Number of CPUs OSB gets                                       |
-| OSB_MEM_SIZE       | Amount of memory OSB gets                                     |
+| Key Name           | Description                                                                                                          |
+|--------------------|----------------------------------------------------------------------------------------------------------------------|
+| RUN_ID             | Run identifier. Will be used in file names                                                                           |
+| TEST_REPO          | Link to k-NN repo. Plugin will be built from source from here. (i.e. https://github.com/opensearch-project/k-NN.git) |
+| TEST_BRANCH        | k-NN branch name. Plugin will be built from source from here                                                         |
+| TEST_JVM           | Amount of JVM to be used for test container (i.e. 32g)                                                               |
+| TEST_CPU_COUNT     | Number of CPUs test container will get. (i.e. 2)                                                                     |
+| TEST_MEM_SIZE      | Amount of total memory test container will be limited at. (i.e. 4G)                                                  |
+| METRICS_JVM        | Amount of JVM to be used for metrics container (i.e. 1g)                                                             |
+| METRICS_CPU_COUNT  | Number of CPUs metrics container will get. (i.e. 2)                                                                  |
+| METRICS_MEM_SIZE   | Amount of total memory metrics container will be limited at. (i.e. 4G)                                               |
+| OSB_PROCEDURE      | OSB procedure to be run                                                                                              |
+| OSB_PARAMS         | OSB params to be used (include .json extension)                                                                      |
+| OSB_SHOULD_PROFILE | Should profiling be triggered for this run (i.e. true or false)                                                      |
+| OSB_CPU_COUNT      | Number of CPUs OSB gets (i.e 2)                                                                                      |
+| OSB_MEM_SIZE       | Amount of memory OSB gets (i.e. 4g)                                                                                  |
+| OPENSEARCH_VERSION  | Version of OpenSearch to use (i.e. 3.0.0 or 2.15.0)                                                                  |
 
 ### Configuring OSB
 OSB is the main benchmarking framework used for k-NN in OpenSearch.
