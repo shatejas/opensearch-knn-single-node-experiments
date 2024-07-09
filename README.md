@@ -65,7 +65,7 @@ There are several environment variables that need to be configured in order to r
 | OSB_SHOULD_PROFILE | Should profiling be triggered for this run (i.e. true or false)                                                      |
 | OSB_CPU_COUNT      | Number of CPUs OSB gets (i.e 2)                                                                                      |
 | OSB_MEM_SIZE       | Amount of memory OSB gets (i.e. 4g)                                                                                  |
-| OPENSEARCH_VERSION  | Version of OpenSearch to use (i.e. 3.0.0 or 2.15.0)                                                                  |
+| OPENSEARCH_VERSION | Version of OpenSearch to use (i.e. 3.0.0 or 2.15.0)                                                                  |
 
 ### Configuring OSB
 OSB is the main benchmarking framework used for k-NN in OpenSearch.
@@ -74,6 +74,11 @@ From a high level, to run an experiment, we need to fill the [osb/custom/params]
 parameters we want to use for the run. This will tell OSB what to do. See 
 [experiments](experiments/low-mem-knn-exp/exp-1/osb-params) for examples of different parameter configurations that can 
 be selected. 
+
+Also, if you want custom procedure or extensions, you need to add them directly to the source in the [osb](osb) 
+directory.
+
+For more general info about OSB and vector search, see https://github.com/opensearch-project/opensearch-benchmark-workloads/tree/main/vectorsearch.
 
 ## Results
 
