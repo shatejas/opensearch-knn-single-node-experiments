@@ -6,13 +6,105 @@
         {
             "name": "{{ target_index_name }}",
             "body": "{{ target_index_body }}"
-        },
-        {
-            "name": "{{ train_index_name }}",
-            "body": "{{ train_index_body }}"
         }
     ],
     "corpora": [
+      {
+        "name": "delete_1k_1",
+        "base-url": "https://os-shatejas-benchmark-datasets-us-east-1.s3.amazonaws.com",
+        "documents": [
+          {
+            "target-index": "{{ target_index_name }}",
+            "source-file": "delete_1k_1.hdf5.bz2",
+            "source-format": "hdf5",
+            "document-count": 1000
+          }
+        ]
+      },
+      {
+        "name": "delete_1k_10",
+        "base-url": "https://os-shatejas-benchmark-datasets-us-east-1.s3.amazonaws.com",
+        "documents": [
+          {
+            "target-index": "{{ target_index_name }}",
+            "source-file": "delete_1k_10.hdf5.bz2",
+            "source-format": "hdf5",
+            "document-count": 1000
+          }
+        ]
+      },
+      {
+        "name": "delete_1k_25",
+        "base-url": "https://os-shatejas-benchmark-datasets-us-east-1.s3.amazonaws.com",
+        "documents": [
+          {
+            "target-index": "{{ target_index_name }}",
+            "source-file": "delete_1k_25.hdf5.bz2",
+            "source-format": "hdf5",
+            "document-count": 1000
+          }
+        ]
+      },
+      {
+        "name": "delete_1k_50",
+        "base-url": "https://os-shatejas-benchmark-datasets-us-east-1.s3.amazonaws.com",
+        "documents": [
+          {
+            "target-index": "{{ target_index_name }}",
+            "source-file": "delete_1k_50.hdf5.bz2",
+            "source-format": "hdf5",
+            "document-count": 1000
+          }
+        ]
+      },
+      {
+        "name": "delete_100k_1",
+        "base-url": "https://os-shatejas-benchmark-datasets-us-east-1.s3.amazonaws.com",
+        "documents": [
+          {
+            "target-index": "{{ target_index_name }}",
+            "source-file": "delete_100k_1.hdf5.bz2",
+            "source-format": "hdf5",
+            "document-count": 100000
+          }
+        ]
+      },
+      {
+        "name": "delete_100k_10",
+        "base-url": "https://os-shatejas-benchmark-datasets-us-east-1.s3.amazonaws.com",
+        "documents": [
+          {
+            "target-index": "{{ target_index_name }}",
+            "source-file": "delete_100k_10.hdf5.bz2",
+            "source-format": "hdf5",
+            "document-count": 100000
+          }
+        ]
+      },
+      {
+        "name": "delete_100k_25",
+        "base-url": "https://os-shatejas-benchmark-datasets-us-east-1.s3.amazonaws.com",
+        "documents": [
+          {
+            "target-index": "{{ target_index_name }}",
+            "source-file": "delete_100k_25.hdf5.bz2",
+            "source-format": "hdf5",
+            "document-count": 100000
+          }
+        ]
+      },
+      {
+        "name": "delete_100k_50",
+        "base-url": "https://os-shatejas-benchmark-datasets-us-east-1.s3.amazonaws.com",
+        "documents": [
+          {
+            "target-index": "{{ target_index_name }}",
+            "source-file": "delete_100k_50.hdf5.bz2",
+            "source-format": "hdf5",
+            "document-count": 100000
+          }
+        ]
+      },
       {
         "name": "cohere",
         "base-url": "https://dbyiw3u3rf9yr.cloudfront.net/corpora/vectorsearch/cohere-wikipedia-22-12-en-embeddings",

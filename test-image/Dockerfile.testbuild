@@ -1,6 +1,6 @@
 # Build the plugin
 ARG OPENSEARCH_VERSION
-FROM opensearchstaging/ci-runner:ci-runner-centos7-opensearch-build-v3 as build
+FROM opensearchstaging/ci-runner:ci-runner-al2-opensearch-build-v1 as build
 COPY ./build-plugin.sh /
 
 ARG OPENSEARCH_VERSION
@@ -17,9 +17,7 @@ RUN yum install unzip procps -y
 USER opensearch
 RUN  rm -rf plugins/opensearch-knn
 RUN mkdir plugins/opensearch-knn
-COPY --from=build
-/home/ci-runner/k-NN/build/distributions/opensearch-knn-${OPENSEARCH_VERSION}.0-SNAPSHOT.zip
-plugins/opensearch-knn/opensearch-knn-${OPENSEARCH_VERSION}.0-SNAPSHOT.zip
+COPY --from=build /home/ci-runner/k-NN/build/distributions/opensearch-knn-${OPENSEARCH_VERSION}.0-SNAPSHOT.zip plugins/opensearch-knn/opensearch-knn-${OPENSEARCH_VERSION}.0-SNAPSHOT.zip
 RUN unzip plugins/opensearch-knn/opensearch-knn-${OPENSEARCH_VERSION}.0-SNAPSHOT.zip -d plugins/opensearch-knn/
 COPY utils/process-stats-collector.sh /process-stats-collector.sh
 COPY utils/profile-helper.sh /profile-helper.sh
