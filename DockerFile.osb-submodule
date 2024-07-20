@@ -6,8 +6,8 @@ RUN ["apt-get", "install", "jq", "--assume-yes"]
 USER 1000
 COPY osb-submodule /
 COPY osb/osb-entry-point.sh /
-COPY /osb/custom /custom
-COPY bench-config-patch-script.sh /
-COPY benchmark.ini.patch /
+COPY osb/custom /custom
+COPY osb/bench-config-patch-script.sh /
+COPY osb/benchmark.ini.patch /
 
 ENTRYPOINT ["bash", "/osb-entry-point.sh"]
