@@ -135,7 +135,8 @@ if [ "$PROCEDURE" = "search-only" ]; then
 else
   set_knn_index_thread_qty 4
 fi
-
+cd osb-submodule
+make install
 opensearch-benchmark execute-test \
     --target-hosts $ENDPOINT \
     --workload-path ./workload.json \

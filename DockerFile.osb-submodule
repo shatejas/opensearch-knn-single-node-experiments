@@ -1,10 +1,11 @@
-FROM python:3.9-slim-buster
+FROM ubuntu:latest
 
 USER 0
 RUN ["apt-get", "update"]
 RUN ["apt-get", "install", "jq", "--assume-yes"]
+RUN ["apt-get", "install", "curl"]
 USER 1000
-COPY osb-submodule /
+COPY osb-submodule /osb-submodule
 COPY osb/osb-entry-point.sh /
 COPY osb/custom /custom
 COPY osb/bench-config-patch-script.sh /
