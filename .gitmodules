@@ -1,0 +1,3 @@
+[submodule "osb-submodule"]
+	path = osb-submodule
+	url = https://github.com/opensearch-project/opensearch-benchmark.git

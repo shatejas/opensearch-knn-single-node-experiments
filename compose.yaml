@@ -42,7 +42,7 @@ services:
     cap_add:
       - SYS_ADMIN
   metrics:
-    image: opensearchproject/opensearch:2.14.0
+    image: opensearchproject/opensearch:2.15.0
     container_name: metrics
     environment:
       - cluster.name=metrics
@@ -77,8 +77,7 @@ services:
     image: custom-osb
     container_name: osb
     build:
-      context: osb
-      dockerfile: Dockerfile.customosb
+      dockerfile: DockerFile.osb-submodule
     depends_on:
       - metrics
       - test
