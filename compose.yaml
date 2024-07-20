@@ -41,45 +41,13 @@ services:
       - seccomp:unconfined
     cap_add:
       - SYS_ADMIN
-  metrics:
-    image: opensearchproject/opensearch:2.15.0
-    container_name: metrics
-    environment:
-      - cluster.name=metrics
-      - node.name=metrics
-      - discovery.type=single-node
-      - bootstrap.memory_lock=true
-      - http.port=9202
-      - transport.port=9602
-      - "OPENSEARCH_JAVA_OPTS=-Xms${METRICS_JVM} -Xmx${METRICS_JVM}"
-      - "DISABLE_SECURITY_PLUGIN=true"
-      - "RUN_ID=${RUN_ID}"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-      nofile:
-        soft: 65536
-        hard: 65536
-    volumes:
-      - metrics:/usr/share/opensearch/data
-    ports:
-      - 9202:9202
-      - 9602:9602
-    networks:
-      - test-net
-    deploy:
-      resources:
-        limits:
-          cpus: "${METRICS_CPU_COUNT}"
-          memory: ${METRICS_MEM_SIZE}
   osb:
     image: custom-osb
     container_name: osb
     build:
-      dockerfile: DockerFile.osb-submodule
+      context: osb
+      dockerfile: Dockerfile.customosb
     depends_on:
-      - metrics
       - test
     volumes:
       - share-data:/share-data
@@ -102,7 +70,6 @@ volumes:
       type: none
       o: bind
       device: /os-data
-  metrics:
   share-data:
     driver: local
     driver_opts:

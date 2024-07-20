@@ -10,7 +10,7 @@ export SHOULD_PROFILE="$OSB_SHOULD_PROFILE"
 
 get_recall() {
     local task_id="$1"
-    output=$(curl -XPOST "metrics:9202/benchmark-metrics-*/_search?pretty" -H 'Content-Type: application/json' -d'
+    output=$(curl -XPOST "https://search-benchmark-metrics-kp2462v4qa4yzbqo26a4gxzxf4.aos.us-east-2.on.aws/benchmark-metrics-*/_search?pretty" -H 'Content-Type: application/json' -d'
       {
         "aggs": {
           "2": {
@@ -94,10 +94,6 @@ set_knn_index_thread_qty() {
 # Just sleep for a minute initially in order to let other containers come up healthily
 sleep 60
 
-# Confirm access to metrics cluster
-echo "Confirming access to metrics cluster..."
-curl metrics:9202
-
 # Confirm access to test cluster
 echo "Confirming access to test cluster..."
 curl test:9200
@@ -116,11 +112,15 @@ if [ ! -f "/opensearch-benchmark/.benchmark/benchmark.ini" ]; then
   bash /bench-config-patch-script.sh /benchmark.ini.patch ~/.benchmark/benchmark.ini
 fi
 
+
+echo "fetching custom osb"
+cd /opensearch-benchmark
+python3 -m pip install -e .
+
 # Run OSB and write output to a particular file in results
 echo "Running OSB..."
-cd /custom
 export ENDPOINT=test:9200
-export PARAMS_FILE=params/${PARAMS}
+export PARAMS_FILE=/custom/params/${PARAMS}
 
 if [ "$SHOULD_PROFILE" = "true" ]; then
   PROFILE_DURATION=60
@@ -135,10 +135,9 @@ if [ "$PROCEDURE" = "search-only" ]; then
 else
   set_knn_index_thread_qty 4
 fi
-
 opensearch-benchmark execute-test \
     --target-hosts $ENDPOINT \
-    --workload-path ./workload.json \
+    --workload-path /custom/workload.json \
     --workload-params ${PARAMS_FILE} \
     --pipeline benchmark-only \
     --test-procedure=${PROCEDURE} \

@@ -9,12 +9,11 @@
         }
     ],
     "corpora": [
-      {
+        {
         "name": "delete_1k_1",
         "base-url": "https://os-shatejas-benchmark-datasets-us-east-1.s3.amazonaws.com",
         "documents": [
           {
-            "target-index": "{{ target_index_name }}",
             "source-file": "delete_1k_1.hdf5.bz2",
             "source-format": "hdf5",
             "document-count": 1000
@@ -26,7 +25,6 @@
         "base-url": "https://os-shatejas-benchmark-datasets-us-east-1.s3.amazonaws.com",
         "documents": [
           {
-            "target-index": "{{ target_index_name }}",
             "source-file": "delete_1k_10.hdf5.bz2",
             "source-format": "hdf5",
             "document-count": 1000
@@ -38,7 +36,6 @@
         "base-url": "https://os-shatejas-benchmark-datasets-us-east-1.s3.amazonaws.com",
         "documents": [
           {
-            "target-index": "{{ target_index_name }}",
             "source-file": "delete_1k_25.hdf5.bz2",
             "source-format": "hdf5",
             "document-count": 1000
@@ -50,7 +47,6 @@
         "base-url": "https://os-shatejas-benchmark-datasets-us-east-1.s3.amazonaws.com",
         "documents": [
           {
-            "target-index": "{{ target_index_name }}",
             "source-file": "delete_1k_50.hdf5.bz2",
             "source-format": "hdf5",
             "document-count": 1000
@@ -62,7 +58,6 @@
         "base-url": "https://os-shatejas-benchmark-datasets-us-east-1.s3.amazonaws.com",
         "documents": [
           {
-            "target-index": "{{ target_index_name }}",
             "source-file": "delete_100k_1.hdf5.bz2",
             "source-format": "hdf5",
             "document-count": 100000
@@ -74,7 +69,6 @@
         "base-url": "https://os-shatejas-benchmark-datasets-us-east-1.s3.amazonaws.com",
         "documents": [
           {
-            "target-index": "{{ target_index_name }}",
             "source-file": "delete_100k_10.hdf5.bz2",
             "source-format": "hdf5",
             "document-count": 100000
@@ -86,7 +80,6 @@
         "base-url": "https://os-shatejas-benchmark-datasets-us-east-1.s3.amazonaws.com",
         "documents": [
           {
-            "target-index": "{{ target_index_name }}",
             "source-file": "delete_100k_25.hdf5.bz2",
             "source-format": "hdf5",
             "document-count": 100000
@@ -98,66 +91,61 @@
         "base-url": "https://os-shatejas-benchmark-datasets-us-east-1.s3.amazonaws.com",
         "documents": [
           {
-            "target-index": "{{ target_index_name }}",
             "source-file": "delete_100k_50.hdf5.bz2",
             "source-format": "hdf5",
             "document-count": 100000
           }
         ]
       },
-      {
-        "name": "cohere",
-        "base-url": "https://dbyiw3u3rf9yr.cloudfront.net/corpora/vectorsearch/cohere-wikipedia-22-12-en-embeddings",
-        "documents": [
-          {
-            "target-index": "{{ target_index_name }}",
-            "source-file": "documents-1k.hdf5.bz2",
-            "source-format": "hdf5",
-            "document-count": 1000
-          }
-        ]
-      },
-      {
-        "name": "cohere-100k",
-        "base-url": "https://dbyiw3u3rf9yr.cloudfront.net/corpora/vectorsearch/cohere-wikipedia-22-12-en-embeddings",
-        "documents": [
-          {
-            "target-index": "{{ target_index_name }}",
-            "source-file": "documents-100k.hdf5.bz2",
-            "source-format": "hdf5",
-            "document-count": 100000
-          }
-        ]
-      },
-      {
-        "name": "cohere-1m",
-        "base-url": "https://dbyiw3u3rf9yr.cloudfront.net/corpora/vectorsearch/cohere-wikipedia-22-12-en-embeddings",
-        "documents": [
-          {
-            "target-index": "{{ target_index_name }}",
-            "source-file": "documents-1m.hdf5.bz2",
-            "source-format": "hdf5",
-            "document-count": 1000000
-          }
-        ]
-      },
-      {
-        "name": "cohere-10m",
-        "base-url": "https://dbyiw3u3rf9yr.cloudfront.net/corpora/vectorsearch/cohere-wikipedia-22-12-en-embeddings",
-        "documents": [
-          {
-            "target-index": "{{ target_index_name }}",
-            "source-file": "documents-10m.hdf5.bz2",
-            "source-format": "hdf5",
-            "document-count": 10000000
-          }
-        ]
-      }
-    ],
+    {
+      "name": "cohere",
+      "base-url": "https://dbyiw3u3rf9yr.cloudfront.net/corpora/vectorsearch/cohere-wikipedia-22-12-en-embeddings",
+      "documents": [
+        {
+          "source-file": "documents-1k.hdf5.bz2",
+          "source-format": "hdf5",
+          "document-count": 1000
+        }
+      ]
+    },
+    {
+      "name": "cohere-100k",
+      "base-url": "https://dbyiw3u3rf9yr.cloudfront.net/corpora/vectorsearch/cohere-wikipedia-22-12-en-embeddings",
+      "documents": [
+        {
+          "source-file": "documents-100k.hdf5.bz2",
+          "source-format": "hdf5",
+          "document-count": 100000
+        }
+      ]
+    },
+    {
+      "name": "cohere-1m",
+      "base-url": "https://dbyiw3u3rf9yr.cloudfront.net/corpora/vectorsearch/cohere-wikipedia-22-12-en-embeddings",
+      "documents": [
+        {
+          "source-file": "documents-1m.hdf5.bz2",
+          "source-format": "hdf5",
+          "document-count": 1000000
+        }
+      ]
+    },
+    {
+      "name": "cohere-10m",
+      "base-url": "https://dbyiw3u3rf9yr.cloudfront.net/corpora/vectorsearch/cohere-wikipedia-22-12-en-embeddings",
+      "documents": [
+        {
+          "source-file": "documents-10m.hdf5.bz2",
+          "source-format": "hdf5",
+          "document-count": 10000000
+        }
+      ]
+    }
+  ],
     "operations": [
       {{ benchmark.collect(parts="operations/*.json") }}
     ],
-    "test_procedures": [
-      {{ benchmark.collect(parts="test_procedures/*.json") }}
-    ]
+      "test_procedures": [
+        {{ benchmark.collect(parts="test_procedures/*.json") }}
+      ]
 }
