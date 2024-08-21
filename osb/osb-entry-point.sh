@@ -73,7 +73,7 @@ set_cluster_settings() {
   {
     "persistent" : {
       "knn.memory.circuit_breaker.limit" : "95%",
-      "knn.feature.query.rewrite.enabled": "false"
+      "knn.feature.query.rewrite.enabled": "true"
     }
   }
   ')
@@ -122,7 +122,7 @@ export PARAMS_FILE=params/${PARAMS}
 if [ "$SHOULD_PROFILE" = "true" ]; then
   PROFILE_DURATION=60
   PROFILE_OUTPUT=${PROFILES_PATH}/flamegraph
-  PROFILE_DELAY=1 # Time to delay before starting profiler
+  PROFILE_DELAY=5 # Time to delay before starting profiler
   echo "${PROFILE_DURATION} ${PROFILE_OUTPUT}-${RUN_ID}.html ${PROFILE_DELAY}" > ${SET_PROFILER_PATH}
 fi
 

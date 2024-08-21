@@ -2,6 +2,9 @@
 
 set -xe
 
+no_cache=$1
+
+
 EXPERIMENT_PATH="experiments/query-latency-debug"
 OSB_PARAMS_PATH="osb/custom/params"
 PARAMS_PATH="experiments/query-latency-debug/osb-params"
@@ -15,7 +18,12 @@ source ${EXPERIMENT_PATH}/functions.sh
 cp ${PARAMS_PATH}/faiss-hnsw.json ${OSB_PARAMS_PATH}
 
 setup_environment ${TMP_ENV_DIR} ${TMP_ENV_NAME} "rewrite-off" faiss-hnsw.json "no-train-test" true
-docker compose --env-file ${ENV_PATH} --env-file ${TMP_ENV_PATH} -f compose.yaml build --no-cache
+
+if [[ "${no_cache,,}" == "true" ]]; then
+    docker compose --env-file ${ENV_PATH} --env-file ${TMP_ENV_PATH} -f compose.yaml build --no-cache
+else
+    docker compose --env-file ${ENV_PATH} --env-file ${TMP_ENV_PATH} -f compose.yaml build
+fi
 
 wait_for_container_stop osb
 

@@ -23,7 +23,6 @@ TMP_ENV_PATH="${EXPERIMENT_PATH}/${TMP_ENV_NAME}"
 source ${EXPERIMENT_PATH}/functions.sh
 
 cp ${PARAMS_PATH}/${engine}-hnsw.json ${OSB_PARAMS_PATH}
-
 setup_environment ${TMP_ENV_DIR} ${TMP_ENV_NAME} ${run_id} ${engine}-hnsw.json ${test_procedure} true
 docker compose --env-file ${ENV_PATH} --env-file ${TMP_ENV_PATH} -f compose.yaml up -d
 
