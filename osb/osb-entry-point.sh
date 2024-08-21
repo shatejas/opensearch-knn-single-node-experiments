@@ -68,11 +68,12 @@ get_recall() {
     echo "$recall"
 }
 
-set_knn_circuit_breaker_to_95() {
+set_cluster_settings() {
   output=$(curl -X PUT "test:9200/_cluster/settings?pretty" -H 'Content-Type: application/json' -d'
   {
     "persistent" : {
-      "knn.memory.circuit_breaker.limit" : "95%"
+      "knn.memory.circuit_breaker.limit" : "95%",
+      "knn.feature.query.rewrite.enabled": "false"
     }
   }
   ')
@@ -112,15 +113,11 @@ if [ ! -f "/opensearch-benchmark/.benchmark/benchmark.ini" ]; then
   bash /bench-config-patch-script.sh /benchmark.ini.patch ~/.benchmark/benchmark.ini
 fi
 
-
-echo "fetching custom osb"
-cd /opensearch-benchmark
-python3 -m pip install -e .
-
 # Run OSB and write output to a particular file in results
 echo "Running OSB..."
+cd /custom
 export ENDPOINT=test:9200
-export PARAMS_FILE=/custom/params/${PARAMS}
+export PARAMS_FILE=/params/${PARAMS}
 
 if [ "$SHOULD_PROFILE" = "true" ]; then
   PROFILE_DURATION=60
@@ -129,7 +126,7 @@ if [ "$SHOULD_PROFILE" = "true" ]; then
   echo "${PROFILE_DURATION} ${PROFILE_OUTPUT}-${RUN_ID}.html ${PROFILE_DELAY}" > ${SET_PROFILER_PATH}
 fi
 
-set_knn_circuit_breaker_to_95
+set_cluster_settings
 if [ "$PROCEDURE" = "search-only" ]; then
   set_knn_index_thread_qty 1
 else
@@ -137,7 +134,7 @@ else
 fi
 opensearch-benchmark execute-test \
     --target-hosts $ENDPOINT \
-    --workload-path /custom/workload.json \
+    --workload-path ./workload.json \
     --workload-params ${PARAMS_FILE} \
     --pipeline benchmark-only \
     --test-procedure=${PROCEDURE} \

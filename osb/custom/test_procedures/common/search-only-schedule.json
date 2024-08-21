@@ -1,9 +1,4 @@
 {
-    "name" : "warmup-indices",
-    "operation" : "warmup-indices",
-    "index": "{{ target_index_name | default('target_index') }}"
-},
-{
     "operation": {
         "name": "prod-queries",
         "operation-type": "vector-search",

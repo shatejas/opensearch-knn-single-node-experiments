@@ -3,7 +3,6 @@ FROM opensearchproject/opensearch-benchmark:1.5.0
 USER 0
 RUN ["apt-get", "update"]
 RUN ["apt-get", "install", "jq", "--assume-yes"]
-RUN git clone -b generate-delete-dataset https://github.com/shatejas/opensearch-benchmark.git
 USER 1000
 COPY osb-entry-point.sh /
 COPY custom /custom

@@ -16,6 +16,7 @@ cp ${PARAMS_PATH}/1k_1.json ${OSB_PARAMS_PATH}
 
 setup_environment ${TMP_ENV_DIR} ${TMP_ENV_NAME} "1m_1" 1k_1.json "no-train-test" true
 docker compose --env-file ${ENV_PATH} --env-file ${TMP_ENV_PATH} -f compose.yaml up -d
+docker cp osb:/opensearch-benchmark/.benchmark/logs ~/osb_logs
 
 wait_for_container_stop osb
 

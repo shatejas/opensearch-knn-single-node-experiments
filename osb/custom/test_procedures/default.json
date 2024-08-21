@@ -4,7 +4,24 @@
     "default": true,
     "schedule": [
        {{ benchmark.collect(parts="common/index-only-schedule.json") }},
-       {{ benchmark.collect(parts="common/delete-docs-schedule.json") }},
+       {{ benchmark.collect(parts="common/force-merge-schedule.json") }},
+       {{ benchmark.collect(parts="common/search-only-schedule.json") }}
+    ]
+},
+{
+    "name": "index-and-force-merge-only",
+    "description": "searches",
+    "default": false,
+    "schedule": [
+       {{ benchmark.collect(parts="index-only-schedule.json") }},
+       {{ benchmark.collect(parts="common/force-merge-schedule.json") }}
+    ]
+},
+{
+    "name": "search-only",
+    "description": "searches",
+    "default": false,
+    "schedule": [
        {{ benchmark.collect(parts="common/search-only-schedule.json") }}
     ]
 }

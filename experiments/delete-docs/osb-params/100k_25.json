@@ -23,6 +23,6 @@
     },
 
     "query_data_set_format": "hdf5",
-    "target_index_bulk_index_data_set_corpus": "delete_100k_25",
+    "query_data_set_corpus": "delete_100k_25",
     "query_count": 100
   }
