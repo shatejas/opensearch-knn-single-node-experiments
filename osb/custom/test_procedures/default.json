@@ -13,13 +13,13 @@
     "description": "searches",
     "default": false,
     "schedule": [
-       {{ benchmark.collect(parts="index-only-schedule.json") }},
+       {{ benchmark.collect(parts="common/index-only-schedule.json") }},
        {{ benchmark.collect(parts="common/force-merge-schedule.json") }}
     ]
 },
 {
     "name": "search-only",
-    "description": "searches",
+    "description": "searches the index",
     "default": false,
     "schedule": [
        {{ benchmark.collect(parts="common/search-only-schedule.json") }}
