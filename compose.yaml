@@ -14,8 +14,9 @@ services:
       - node.name=test
       - discovery.type=single-node
       - bootstrap.memory_lock=true
-      - "OPENSEARCH_JAVA_OPTS=-Xms${TEST_JVM} -Xmx${TEST_JVM} -XX:StartFlightRecording=delay=5s,dumponexit=true,filename=/share-data/profiles/${RUN_ID}.jfr"
+      - "OPENSEARCH_JAVA_OPTS=-Xms${TEST_JVM} -Xmx${TEST_JVM}"
       - "DISABLE_SECURITY_PLUGIN=true"
+      - "LD_PRELOAD=/usr/lib64/libjemalloc.so.2"
       - "RUN_ID=${RUN_ID}"
     ulimits:
       memlock:

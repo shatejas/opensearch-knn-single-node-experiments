@@ -9,6 +9,22 @@
     ]
 },
 {
+    "name": "index-only",
+    "description": "searches",
+    "default": false,
+    "schedule": [
+       {{ benchmark.collect(parts="common/index-only-schedule.json") }}
+    ]
+},
+{
+    "name": "force-merge-only",
+    "description": "searches",
+    "default": false,
+    "schedule": [
+       {{ benchmark.collect(parts="common/force-merge-schedule.json") }}
+    ]
+},
+{
     "name": "index-and-force-merge-only",
     "description": "searches",
     "default": false,

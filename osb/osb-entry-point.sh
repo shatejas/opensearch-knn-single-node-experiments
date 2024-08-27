@@ -10,7 +10,7 @@ export SHOULD_PROFILE="$OSB_SHOULD_PROFILE"
 
 get_recall() {
     local task_id="$1"
-    output=$(curl -XPOST "https://search-benchmark-metrics-kp2462v4qa4yzbqo26a4gxzxf4.aos.us-east-2.on.aws/benchmark-metrics-*/_search?pretty" -H 'Content-Type: application/json' -d'
+    output=$(curl -XPOST "metrics:9202/benchmark-metrics-*/_search?pretty" -H 'Content-Type: application/json' -d'
       {
         "aggs": {
           "2": {
@@ -73,7 +73,8 @@ set_cluster_settings() {
   {
     "persistent" : {
       "knn.memory.circuit_breaker.limit" : "95%",
-      "knn.feature.query.rewrite.enabled": "true"
+      "knn.feature.query.rewrite.enabled": "true",
+      "knn.vector_streaming_memory.limit": "10mb"
     }
   }
   ')
@@ -120,9 +121,9 @@ export ENDPOINT=test:9200
 export PARAMS_FILE=params/${PARAMS}
 
 if [ "$SHOULD_PROFILE" = "true" ]; then
-  PROFILE_DURATION=60
+  PROFILE_DURATION=600
   PROFILE_OUTPUT=${PROFILES_PATH}/flamegraph
-  PROFILE_DELAY=5 # Time to delay before starting profiler
+  PROFILE_DELAY=90 # Time to delay before starting profiler
   echo "${PROFILE_DURATION} ${PROFILE_OUTPUT}-${RUN_ID}.html ${PROFILE_DELAY}" > ${SET_PROFILER_PATH}
 fi
 
@@ -145,7 +146,7 @@ task_id=$(cat /tmp/output.txt | grep "Test Execution ID" | awk -F ': ' '{print $
 
 #TODO: Improve this
 # If its search procedure, get the recall value
-if [ "$PROCEDURE" = "search-only" ]; then
+if [ "$PROCEDURE" = "no-train-test" ]; then
   recall_value=$(get_recall $task_id)
   echo $recall_value > ${RESULTS_PATH}/recall-${RUN_ID}.txt
 fi
