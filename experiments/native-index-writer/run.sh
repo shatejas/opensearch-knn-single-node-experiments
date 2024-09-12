@@ -24,7 +24,7 @@ source ${EXPERIMENT_ROOT}/functions.sh
 rm -f /tmp/share-data/*/*
 
 cp ${PARAMS_PATH}/faiss-hnsw.json ${OSB_PARAMS_PATH}
-setup_environment ${TMP_ENV_DIR} ${TMP_ENV_NAME} ${run_id} faiss-hnsw.json ${test_procedure} false
+setup_environment ${TMP_ENV_DIR} ${TMP_ENV_NAME} ${run_id} faiss-hnsw.json ${test_procedure}
 docker compose --env-file ${ENV_PATH} --env-file ${TMP_ENV_PATH} -f compose.yaml up -d
 
 wait_for_container_stop osb

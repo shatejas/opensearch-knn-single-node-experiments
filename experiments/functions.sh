@@ -6,7 +6,7 @@ setup_environment() {
     local RUN_ID="$3"
     local OSB_PARAMS="$4"
     local OSB_PROCEDURE="$5"
-    local OSB_SHOULD_PROFILE="$6"
+    #local OSB_SHOULD_PROFILE="$6"
 
     mkdir -p ${TMP_ENV_DIR}
     TMP_ENV_PATH="${TMP_ENV_DIR}/${TMP_ENV_NAME}"
@@ -14,7 +14,7 @@ setup_environment() {
     echo "RUN_ID=${RUN_ID}" >> "${TMP_ENV_PATH}"
     echo "OSB_PARAMS=${OSB_PARAMS}" >> "${TMP_ENV_PATH}"
     echo "OSB_PROCEDURE=${OSB_PROCEDURE}" >> "${TMP_ENV_PATH}"
-    echo "OSB_SHOULD_PROFILE=${OSB_SHOULD_PROFILE}" >> "${TMP_ENV_PATH}"
+    #echo "OSB_SHOULD_PROFILE=${OSB_SHOULD_PROFILE}" >> "${TMP_ENV_PATH}"
 }
 
 
