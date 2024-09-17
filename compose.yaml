@@ -63,6 +63,7 @@ services:
         hard: 65536
     volumes:
       - metrics:/usr/share/opensearch/data
+      - logs:/usr/share/opensearch/logs #timebox it else figure this out later
     ports:
       - 9202:9202
       - 9602:9602

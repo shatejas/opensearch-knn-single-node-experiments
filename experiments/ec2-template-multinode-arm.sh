@@ -32,5 +32,8 @@ source /etc/profile.d/conda.sh
 source ~/.bashrc
 
 conda install python=3.11 -y
+conda install h5py -y
 
-# TODO: install opensearch-benchmark
+pip install opensearch-benchmark
+# needed so it creates a .benchmarks folder
+opensearch-benchmark list workloads
