@@ -5,18 +5,15 @@ set -xe
 S3_BASE_PATH=s3://shatejas-benchmarking-results
 
 test_procedure=$1
-osparams=$2
-run_id=$3
-
+run_id=$2
 
 echo ${test_procedure}
 echo ${run_id}
-echo ${osparams}
 
 EXPERIMENT_ROOT="experiments"
-EXPERIMENT_PATH="${EXPERIMENT_ROOT}/native-index-writer"
+EXPERIMENT_PATH="${EXPERIMENT_ROOT}/concurrent-segment-search"
 OSB_PARAMS_PATH="osb/custom/params"
-PARAMS_PATH="${EXPERIMENT_ROOT}/native-index-writer/osb-params"
+PARAMS_PATH="${EXPERIMENT_ROOT}/concurrent-segment-search/osb-params"
 ENV_PATH="${EXPERIMENT_PATH}/test.env"
 TMP_ENV_DIR="${EXPERIMENT_PATH}/tmp"
 TMP_ENV_NAME="test.env"
@@ -26,8 +23,8 @@ source ${EXPERIMENT_ROOT}/functions.sh
 
 rm -f /tmp/share-data/*/*
 
-cp ${PARAMS_PATH}/${osparams}.json ${OSB_PARAMS_PATH}
-setup_environment ${TMP_ENV_DIR} ${TMP_ENV_NAME} ${run_id} ${osparams}.json ${test_procedure}
+cp ${PARAMS_PATH}/faiss-hnsw.json ${OSB_PARAMS_PATH}
+setup_environment ${TMP_ENV_DIR} ${TMP_ENV_NAME} ${run_id} faiss-hnsw.json ${test_procedure}
 docker compose --env-file ${ENV_PATH} --env-file ${TMP_ENV_PATH} -f compose.yaml up -d
 
 wait_for_container_stop osb

@@ -92,6 +92,8 @@ services:
       - "OSB_PARAMS=${OSB_PARAMS}"
       - "OSB_SHOULD_PROFILE=${OSB_SHOULD_PROFILE}"
       - "RUN_ID=${RUN_ID}"
+      - "PROFILE_DURATION=${PROFILE_DURATION}"
+      - "PROFILE_DELAY=${PROFILE_DELAY}"
     deploy:
       resources:
         limits:

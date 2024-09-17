@@ -72,9 +72,7 @@ set_cluster_settings() {
   output=$(curl -X PUT "test:9200/_cluster/settings?pretty" -H 'Content-Type: application/json' -d'
   {
     "persistent" : {
-      "knn.memory.circuit_breaker.limit" : "95%",
-      "knn.feature.query.rewrite.enabled": "true",
-      "knn.vector_streaming_memory.limit": "10mb"
+      "knn.memory.circuit_breaker.limit" : "95%"
     }
   }
   ')
@@ -121,9 +119,9 @@ export ENDPOINT=test:9200
 export PARAMS_FILE=params/${PARAMS}
 
 if [ "$SHOULD_PROFILE" = "true" ]; then
-  PROFILE_DURATION=600
+  PROFILE_DURATION=6000
   PROFILE_OUTPUT=${PROFILES_PATH}/flamegraph
-  PROFILE_DELAY=90 # Time to delay before starting profiler
+  PROFILE_DELAY=300 # Time to delay before starting profiler
   echo "${PROFILE_DURATION} ${PROFILE_OUTPUT}-${RUN_ID}.html ${PROFILE_DELAY}" > ${SET_PROFILER_PATH}
 fi
 
