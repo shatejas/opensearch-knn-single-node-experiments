@@ -1,4 +1,4 @@
-FROM opensearchproject/opensearch-benchmark:1.5.0
+FROM opensearchproject/opensearch-benchmark:latest
 
 USER 0
 RUN ["apt-get", "update"]

@@ -26,7 +26,7 @@ an extremely efficient, yet configurable manner. Specifically, the goals are
 The system is architected with a single [docker-compose file](compose.yaml). This docker compose will do the following:
 1. Build a custom test OpenSearch docker image based on provided Github repo and test branch
 2. Run a single node cluster with the custom docker image and resource constraints. It will add a JFR and system metrics and profiling
-3. Run a lightweight separate OpenSearch metric cluster for OSB to output results to (this is kind of hacky and can be removed once we add recall to OSB test report)
+3. Run a lightweight separate OpenSearch metric cluster for OSB to output results to (this collects all metrics in addition to final report)
 4. Build a custom OSB image with the provided extensions
 5. Run the configured OSB workload identified by the run ID and kick off an async profile on the OpenSearch process
 
@@ -107,5 +107,4 @@ Additionally, the OpenSearch process is ran with JFR configured to give more pro
 
 ### Results
 
-OSB will output its results to the "/tmp/share-data/results" path. In it, there will be a text file that contains the 
-recall and one that contains the OSB report. 
+OSB will output its results to the "/tmp/share-data/results" path. In it, there will be a csv file that contains the OSB report. 
