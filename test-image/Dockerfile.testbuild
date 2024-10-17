@@ -1,6 +1,6 @@
 # Build the plugin
 ARG OPENSEARCH_VERSION
-FROM opensearchstaging/ci-runner:ci-runner-centos7-opensearch-build-v3 as build
+FROM opensearchstaging/ci-runner:ci-runner-al2-opensearch-build-v1 as build
 COPY ./build-plugin.sh /
 
 ARG OPENSEARCH_VERSION
@@ -14,6 +14,8 @@ FROM opensearchstaging/opensearch:${OPENSEARCH_VERSION}
 ARG OPENSEARCH_VERSION
 USER root
 RUN yum install unzip procps -y
+RUN yum install -y jemalloc-devel
+ENV LD_PRELOAD=/usr/lib64/libjemalloc.so.2
 USER opensearch
 RUN  rm -rf plugins/opensearch-knn
 RUN mkdir plugins/opensearch-knn
