@@ -119,9 +119,8 @@ export ENDPOINT=test:9200
 export PARAMS_FILE=params/${PARAMS}
 
 if [ "$SHOULD_PROFILE" = "true" ]; then
-  PROFILE_DURATION=6000
   PROFILE_OUTPUT=${PROFILES_PATH}/flamegraph
-  PROFILE_DELAY=300 # Time to delay before starting profiler
+  echo "Creating profile path..."
   echo "${PROFILE_DURATION} ${PROFILE_OUTPUT}-${RUN_ID}.html ${PROFILE_DELAY}" > ${SET_PROFILER_PATH}
 fi
 
